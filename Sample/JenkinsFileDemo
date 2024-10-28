@@ -1,0 +1,31 @@
+//Sample Jenkins File
+
+pipeline {
+    agent any
+    environment {
+        def myString = "Hello"
+        def myNumber = 100
+        def myBool = true
+    }
+    stages {
+        stage("Stage 1"){
+            steps {
+                echo "I am at Stage One"
+            }
+        }
+        stage("Stage 2"){
+            steps {
+                echo "I am at Stage Two"
+            }
+        }
+        stage("Env echo"){
+            steps {
+                echo "My String is: ${myString}"
+                echo "My Number is: ${myNumber}"
+                echo "My Bool is: ${myBool}"
+            }
+        }
+    }
+}
+
+//https://plugins.jenkins.io/pipeline-stage-view/

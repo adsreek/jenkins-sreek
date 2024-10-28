@@ -1,0 +1,24 @@
+pipeline{
+    agent any
+    parameters {
+        string(name: 'Build_Version', defaultValue: 'V${BUILD_NUMBER}', description: 'Build Version')
+        string(name: 'pname', defaultValue: 'Unknown', description: 'Person Name')        
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+        booleanParam(name: 'LeapYear', defaultValue: true, description: 'Born in 2000')
+        choice(name: 'YYear', choices: ['2000', '2001'], description: 'is ')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    }
+
+    stages {
+        stage('Print Params'){
+            steps{
+                echo "Build Version Value is ${params.Build_Version}"
+                echo "Name of the Person is ${params.pname}"
+                echo "Biography : ${params.BIOGRAPHY}"
+                echo "Leap Year is ${params.LeapYear}"
+                echo "Born Yearis ${params.YYear}"
+                echo "Password is ${params.PASSWORD}"
+            }
+        })
+    }
+}

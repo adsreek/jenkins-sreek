@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+    parameters{
+        string(name: 'ServerName', defaultValue:"reeser01", description: "Server Name")
+    }
+
+    stages {
+        stage("Server Confirm"){
+            input{
+                message "Please confirm the server name"
+                ok "Submit"
+                parameters {
+                    string(defaultValue:"${params.ServerName}", name:'Server_Name', trim: true)
+                }
+            }
+            steps {
+                echo "Server is OK"
+            }
+        }
+
+        stage('Select Env'){
+            steps{
+                script {
+                    env.serverval = input(
+                        message: 'Select Environment',
+                        parameters: [choice(name: 'selEnv', choices: 'DEV\nQAT', description:'Select Enviroment')]
+                    )
+                    echo "Selected env is ${serverval}"
+                }
+            }
+        }
+    }
+}
